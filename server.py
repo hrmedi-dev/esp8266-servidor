@@ -2,25 +2,22 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def home():
-    return "Servidor en Railway funcionando! 🚀"
-
 @app.route("/led", methods=["POST"])
-def led():
-    data = request.json
-    if not data or "estado" not in data:
-        return jsonify({"error": "Falta el parámetro 'estado'"}), 400
-
-    estado = data["estado"]
+def led_control():
+    data = request.get_json()
+    estado = data.get("estado")
+    
     if estado == "encender":
-        print("LED ENCENDIDO")  # Aquí iría la lógica para encender el LED
+        # Aquí pondrías el código para encender el LED en el ESP8266
+        print("Encender LED")
+        return jsonify({"message": "LED encendido"})
+    
     elif estado == "apagar":
-        print("LED APAGADO")  # Aquí iría la lógica para apagar el LED
-    else:
-        return jsonify({"error": "Comando no válido"}), 400
-
-    return jsonify({"mensaje": f"LED {estado} correctamente"}), 200
+        # Aquí pondrías el código para apagar el LED en el ESP8266
+        print("Apagar LED")
+        return jsonify({"message": "LED apagado"})
+    
+    return jsonify({"message": "Comando no válido"}), 400
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=8080)
