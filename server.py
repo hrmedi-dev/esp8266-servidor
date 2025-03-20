@@ -10,7 +10,7 @@ def get_data():
 @app.route('/dato', methods=['POST'])
 def post_data():
     # Obtiene los datos enviados en la solicitud POST
-    dato = request.get_json()
+    data = request.get_json()
     temperature = data.get('temperature')
     humidity = data.get('humidity')
     
