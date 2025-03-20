@@ -11,14 +11,14 @@ def get_data():
 def post_data():
     # Obtiene los datos enviados en la solicitud POST
     data = request.get_json()
-    temperatura = data.get('temperature')
-    humedad = data.get('humidity')
+    temperature = data.get('temperature')
+    humidity = data.get('humidity')
     
     # Responde con los datos recibidos
     return jsonify({
         "received": {
-            "temperatura": temperature,
-            "humedad": humidity
+            "temperature": temperature,
+            "humidity": humidity
         }
     })
 
